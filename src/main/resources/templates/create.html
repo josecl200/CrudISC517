@@ -20,16 +20,16 @@
     <h3 th:if="${modificar==null}">Registro de estudiantes</h3>
     <form action="/update" method="POST" class="registro" th:if="${modificar!=null}">
         <label for="nombre">Nombre</label>
-        <input type="text" id="nombre" name="nombre" value="${estudiante.nombre}"/>
+        <input type="text" id="nombre" name="nombre" th:value="${estudiante.nombre}" />
 
         <label for="apellido">Apellido</label>
-        <input type="text" id="apellido" name="apellido" value="${estudiante.apellido}"/>
+        <input type="text" id="apellido" name="apellido" th:value="${estudiante.apellido}"/>
 
         <label for="matricula">Matricula</label>
-        <input type="text" id="matricula" name="matricula" value="${estudiante.matricula?string["0"]}"/>
+        <input type="text" id="matricula" name="matricula" th:value="${estudiante.matricula}" readonly/>
 
         <label for="telefono">Telefono</label>
-        <input type="text" id="telefono" name="telefono" value="${estudiante.telefono}"/>
+        <input type="text" id="telefono" name="telefono" th:value="${estudiante.telefono}"/>
 
         <input type="submit" value="Submit"/>
     </form>

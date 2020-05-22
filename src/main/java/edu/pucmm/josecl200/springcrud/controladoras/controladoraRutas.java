@@ -28,18 +28,43 @@ public class controladoraRutas {
     }
 
     @RequestMapping(path = "/create", method = RequestMethod.POST)
-    public String insertEst(@RequestParam String matricula,@RequestParam String nombre,@RequestParam String apellido,@RequestParam String telefono){
-        System.out.println(matricula+nombre+apellido+telefono);
-        Estudiante nuveau = new Estudiante(Integer.parseInt(matricula),nombre,apellido,telefono);
+    public String insertEst(@RequestParam int matricula,@RequestParam String nombre,@RequestParam String apellido,@RequestParam String telefono){
+        Estudiante nuveau = new Estudiante(matricula,nombre,apellido,telefono);
         if(service.createEstudiante(nuveau)){
-            return "redirect:index";
+            return "redirect:/";
         }else{
             return "no sirve xd";
         }
     }
 
     @RequestMapping(path = "/read/{matricula}", method = RequestMethod.GET)
-    public String list(Model model, @PathVariable String matricula){
+    public String list(Model model, @PathVariable int matricula){
+        model.addAttribute("estudiante", service.readEstudiante(matricula));
+        return "read";
+    }
+
+    @RequestMapping(path = "/update/{matricula}", method = RequestMethod.GET)
+    public String update(Model model, @PathVariable int matricula){
+        model.addAttribute("estudiante", service.readEstudiante(matricula));
+        model.addAttribute("modificar", true);
         return "create";
+    }
+    @RequestMapping(path = "/update", method = RequestMethod.POST)
+    public String updateEst(@RequestParam int matricula,@RequestParam String nombre,@RequestParam String apellido,@RequestParam String telefono){
+        Estudiante nuveau = new Estudiante(matricula,nombre,apellido,telefono);
+        if(service.updateEstudiante(nuveau)){
+            return "redirect:/";
+        }else{
+            return "no sirve xd";
+        }
+    }
+
+    @RequestMapping(path = "/delete/{matricula}", method = RequestMethod.POST)
+    public String deleteEst(@PathVariable int matricula){
+        if(service.deleteEstudiante(matricula)){
+            return "redirect:/";
+        }else{
+            return "no sirve xd";
+        }
     }
 }
