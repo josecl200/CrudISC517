@@ -1,16 +1,19 @@
 package edu.pucmm.josecl200.springcrud.servicios;
 
 import edu.pucmm.josecl200.springcrud.entidades.Estudiante;
+import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
+@Service
 public class EstudianteServ {
-    private List<Estudiante> estudiantes;
+    private List<Estudiante> estudiantes=new ArrayList<>();
     public List<Estudiante> listEstudiante(){
         return estudiantes;
     }
     public boolean createEstudiante(Estudiante est){
-        if(!estudiantes.contains(est) && estudiantes.add(est))
+        if(estudiantes.add(est))
             return true;
         return false;
     }

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es_do">
+<head>
+    <meta charset="UTF-8">
+    <title>CRUD Programación Web | Create</title>
+    <link href="/css/font-awesome-4.7.0/css/font-awesome.css" type="text/css" rel="stylesheet" />
+    <link href="/css/bootstrap-4.3.1-dist/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    <link href="/css/extra.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<header>
+    <h1>Primer CRUD Programación Web | ISC-517</h1>
+</header>
+<nav class="navbar navbar-light bg-light">
+    <a class="nav-item" href="/">Página Principal</a>
+    <a class="nav-item" href="/create">Nuevo Estudiante</a>
+</nav>
+<main>
+    <h3 th:if="${modificar!=null}">Modificación de estudiante de estudiantes</h3>
+    <h3 th:if="${modificar==null}">Registro de estudiantes</h3>
+    <form action="/update" method="POST" class="registro" th:if="${modificar!=null}">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" value="${estudiante.nombre}"/>
+
+        <label for="apellido">Apellido</label>
+        <input type="text" id="apellido" name="apellido" value="${estudiante.apellido}"/>
+
+        <label for="matricula">Matricula</label>
+        <input type="text" id="matricula" name="matricula" value="${estudiante.matricula?string["0"]}"/>
+
+        <label for="telefono">Telefono</label>
+        <input type="text" id="telefono" name="telefono" value="${estudiante.telefono}"/>
+
+        <input type="submit" value="Submit"/>
+    </form>
+
+    <form th:if="${modificar==null}" action="/create" method="POST">
+        <label for="nombre">Nombre</label>
+        <input type="text" id="nombre" name="nombre" />
+
+        <label for="apellido">Apellido</label>
+        <input type="text" id="apellido" name="apellido" />
+
+        <label for="matricula">Matricula</label>
+        <input type="text" id="matricula" name="matricula" />
+
+        <label for="telefono">Telefono</label>
+        <input type="text" id="telefono" name="telefono" />
+
+        <input type="submit" value="Submit"/>
+    </form>
+
+
+</main>
+</body>
+</html>
